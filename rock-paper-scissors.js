@@ -1,36 +1,59 @@
-/* Create the game rock, paper, scissors */
-
-/* Write the logic to get computer's choice */
-
-/* Generate number from 1 to 3 */
-const min = 1
-const max = 3
-
-const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
-
-/* Use if...else statements to get computer choice based on number generated */
-
 function getComputerChoice() {
-    if (randomNumber === 1) {
-        return "rock"
-    } else if (randomNumber === 2) {
+    const option = Math.floor(Math.random() * 3);
+    if (option === 0) {
+        return "rock";
+    } else if (option === 1){
         return "paper"
-    } else if (randomNumber === 3) {
-        return "scissors"
-    }
+    } else {
+        return "scissors";
+    }   
 } 
 
-/*Obtain user input for choice */
-
-console.log(getComputerChoice());
-
 function getHumanChoice() {
-    return prompt("Rock, Paper or Scissors?")
+    let choice = prompt("Rock, Paper or Scissors?");
+    return choice.toLowerCase();
 }
 
-console.log(getHumanChoice());
+function getWinner(humanScore, computerScore) {
+    if (humanScore === computerScore) {
+        return `It's a tie! Score: ${humanScore}, Computer Score: ${computerScore}`;
+    } else if (userScore > computerScore) {
+        return `You win! Score: ${humanScore}, Computer Score: ${computerScore}`;
+    }
+    return `Computer Wins! Score ${humanScore}, Your Score: ${humanScore}`;
+}
 
-/* Declare variables for human and computer scores */
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    let rounds = 1;
 
-let humanScore = 0
-let computerScore = 0
+    function playRound(humanChoice, computerChoice) {
+
+        if (humanChoice === computerChoice) {
+            console.log(`Draw, both players picked ${humanChoice}`)
+        } else if (
+            (humanChoice === `paper` && computerChoice === `rock`) ||
+            (humanChoice === `rock` && computerChoice === `scissors`) ||
+            (humanChoice === `scissors` && computerChoice === `paper`)
+        ) {
+            console.log(`You Win! "${humanChoice} "beats" ${computerChoice}`);
+            humanScore++;
+        } else {
+            console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
+            computerScore++;
+        }
+        rounds++
+    }
+
+    while (rounds <= 5) {
+        let humanChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
+
+        playRound(computerChoice, humanChoice);
+    }
+    return getWinner (humanScore, computerScore);
+}
+
+let results = playGame();
+console.log(results);
