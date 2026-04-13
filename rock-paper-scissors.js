@@ -20,6 +20,8 @@ function getComputerChoice() {
     }
 } 
 
+/*Obtain user input for choice */
+
 console.log(getComputerChoice());
 
 function getHumanChoice() {
@@ -27,3 +29,8 @@ function getHumanChoice() {
 }
 
 console.log(getHumanChoice());
+
+/* Declare variables for human and computer scores */
+
+let playerScore = 0
+let computerScore = 0
