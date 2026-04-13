@@ -32,5 +32,5 @@ console.log(getHumanChoice());
 
 /* Declare variables for human and computer scores */
 
-let playerScore = 0
+let humanScore = 0
 let computerScore = 0
